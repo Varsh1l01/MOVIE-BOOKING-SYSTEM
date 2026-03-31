@@ -1,0 +1,364 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ─────────────────────────────────────────
+// USERS & AUTH
+// ─────────────────────────────────────────
+model User {
+  id           String    @id @default(uuid())
+  name         String
+  email        String    @unique
+  phone        String    @unique
+  passwordHash String
+  role         Role      @default(USER)
+  isVerified   Boolean   @default(false)
+  isActive     Boolean   @default(true)
+  avatarUrl    String?
+  city         String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  otps         Otp[]
+  bookings     Booking[]
+  payments     Payment[]
+  refreshTokens RefreshToken[]
+
+  @@index([email])
+  @@index([phone])
+}
+
+enum Role {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+model Otp {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  code      String
+  purpose   OtpPurpose
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+enum OtpPurpose {
+  EMAIL_VERIFY
+  PHONE_VERIFY
+  PASSWORD_RESET
+  LOGIN
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([token])
+}
+
+// ─────────────────────────────────────────
+// MOVIES
+// ─────────────────────────────────────────
+model Movie {
+  id          String       @id @default(uuid())
+  title       String
+  slug        String       @unique
+  description String
+  posterUrl   String
+  bannerUrl   String?
+  trailerUrl  String?
+  genre       String[]
+  language    String[]
+  duration    Int          // minutes
+  releaseDate DateTime
+  endDate     DateTime?
+  rating      Float        @default(0)
+  totalRatings Int         @default(0)
+  status      MovieStatus  @default(UPCOMING)
+  director    String?
+  cast        String[]
+  certification String?    // U, UA, A, S
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  shows       Show[]
+
+  @@index([slug])
+  @@index([status])
+  @@index([releaseDate])
+}
+
+enum MovieStatus {
+  UPCOMING
+  NOW_PLAYING
+  ENDED
+}
+
+// ─────────────────────────────────────────
+// THEATRES & SCREENS
+// ─────────────────────────────────────────
+model Theatre {
+  id        String   @id @default(uuid())
+  name      String
+  address   String
+  city      String
+  state     String
+  pincode   String
+  latitude  Float?
+  longitude Float?
+  phone     String?
+  email     String?
+  isActive  Boolean  @default(true)
+  amenities String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  screens   Screen[]
+
+  @@index([city])
+}
+
+model Screen {
+  id         String     @id @default(uuid())
+  theatreId  String
+  theatre    Theatre    @relation(fields: [theatreId], references: [id], onDelete: Cascade)
+  name       String     // Screen 1, IMAX Hall, etc.
+  type       ScreenType @default(REGULAR)
+  totalSeats Int
+  isActive   Boolean    @default(true)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  seats      Seat[]
+  shows      Show[]
+
+  @@index([theatreId])
+}
+
+enum ScreenType {
+  REGULAR
+  IMAX
+  FOUR_DX
+  PREMIUM
+  DRIVE_IN
+}
+
+// ─────────────────────────────────────────
+// SEATS
+// ─────────────────────────────────────────
+model Seat {
+  id         String    @id @default(uuid())
+  screenId   String
+  screen     Screen    @relation(fields: [screenId], references: [id], onDelete: Cascade)
+  row        String    // A, B, C ...
+  number     Int       // 1, 2, 3 ...
+  seatCode   String    // A1, B12 etc.
+  type       SeatType  @default(REGULAR)
+  isActive   Boolean   @default(true)
+  createdAt  DateTime  @default(now())
+
+  bookingItems BookingItem[]
+
+  @@unique([screenId, seatCode])
+  @@index([screenId])
+}
+
+enum SeatType {
+  REGULAR
+  PREMIUM
+  RECLINER
+  COUPLE
+  ACCESSIBLE
+}
+
+// ─────────────────────────────────────────
+// SHOWS
+// ─────────────────────────────────────────
+model Show {
+  id            String     @id @default(uuid())
+  movieId       String
+  movie         Movie      @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  screenId      String
+  screen        Screen     @relation(fields: [screenId], references: [id], onDelete: Cascade)
+  startTime     DateTime
+  endTime       DateTime
+  language      String
+  format        ShowFormat @default(TWO_D)
+  status        ShowStatus @default(ACTIVE)
+  
+  // Pricing per seat type
+  priceRegular  Float      @default(150)
+  pricePremium  Float      @default(250)
+  priceRecliner Float      @default(400)
+  priceCouple   Float      @default(500)
+
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  bookings      Booking[]
+  bookingItems  BookingItem[]
+
+  @@index([movieId])
+  @@index([screenId])
+  @@index([startTime])
+}
+
+enum ShowFormat {
+  TWO_D
+  THREE_D
+  IMAX
+  FOUR_DX
+  IMAX_THREE_D
+}
+
+enum ShowStatus {
+  ACTIVE
+  CANCELLED
+  HOUSEFULL
+  COMPLETED
+}
+
+// ─────────────────────────────────────────
+// BOOKINGS
+// ─────────────────────────────────────────
+model Booking {
+  id              String        @id @default(uuid())
+  bookingRef      String        @unique // MB-XXXXXXXX
+  userId          String
+  user            User          @relation(fields: [userId], references: [id])
+  showId          String
+  show            Show          @relation(fields: [showId], references: [id])
+  status          BookingStatus @default(PENDING)
+  totalSeats      Int
+  subtotal        Float
+  discount        Float         @default(0)
+  convenienceFee  Float         @default(0)
+  totalAmount     Float
+  couponId        String?
+  coupon          Coupon?       @relation(fields: [couponId], references: [id])
+  expiresAt       DateTime?     // For pending bookings
+  confirmedAt     DateTime?
+  cancelledAt     DateTime?
+  cancelReason    String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  bookingItems    BookingItem[]
+  payment         Payment?
+
+  @@index([userId])
+  @@index([showId])
+  @@index([bookingRef])
+  @@index([status])
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  REFUNDED
+  EXPIRED
+}
+
+model BookingItem {
+  id        String  @id @default(uuid())
+  bookingId String
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  showId    String
+  show      Show    @relation(fields: [showId], references: [id])
+  seatId    String
+  seat      Seat    @relation(fields: [seatId], references: [id])
+  seatCode  String
+  seatType  SeatType
+  price     Float
+
+  @@unique([showId, seatId])
+  @@index([bookingId])
+  @@index([showId, seatId])
+}
+
+// ─────────────────────────────────────────
+// PAYMENTS
+// ─────────────────────────────────────────
+model Payment {
+  id              String        @id @default(uuid())
+  bookingId       String        @unique
+  booking         Booking       @relation(fields: [bookingId], references: [id])
+  userId          String
+  user            User          @relation(fields: [userId], references: [id])
+  amount          Float
+  currency        String        @default("INR")
+  method          PaymentMethod
+  status          PaymentStatus @default(PENDING)
+  gatewayOrderId  String?
+  gatewayPaymentId String?
+  gatewaySignature String?
+  failureReason   String?
+  refundAmount    Float?
+  refundedAt      DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([bookingId])
+  @@index([userId])
+}
+
+enum PaymentMethod {
+  UPI
+  CARD
+  NET_BANKING
+  WALLET
+  MOCK
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REFUNDED
+  PARTIALLY_REFUNDED
+}
+
+// ─────────────────────────────────────────
+// COUPONS
+// ─────────────────────────────────────────
+model Coupon {
+  id               String      @id @default(uuid())
+  code             String      @unique
+  description      String
+  type             CouponType
+  value            Float       // % or flat amount
+  minOrderAmount   Float       @default(0)
+  maxDiscount      Float?
+  usageLimit       Int         @default(100)
+  usedCount        Int         @default(0)
+  perUserLimit     Int         @default(1)
+  validFrom        DateTime
+  validUntil       DateTime
+  isActive         Boolean     @default(true)
+  applicableGenres String[]
+  createdAt        DateTime    @default(now())
+
+  bookings         Booking[]
+
+  @@index([code])
+}
+
+enum CouponType {
+  PERCENTAGE
+  FLAT
+}
