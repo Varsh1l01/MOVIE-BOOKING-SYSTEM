@@ -126,31 +126,30 @@ export default function SeatSelectionPage() {
         </div>
       </div>
 
-      {/* Screen indicator */}
-      <div className="text-center mb-10">
-        <div className="screen-top" />
-        <span className="text-xs text-dark-500 uppercase tracking-widest">Screen This Way</span>
-      </div>
+      {/* Single w-fit mx-auto block: shrinks to seat width, auto-centers on page */}
+      <div className="w-fit mx-auto">
 
-      {/* Seat Legend */}
-      <div className="flex flex-wrap justify-center gap-5 mb-8">
-        {[
-          { label: 'Available', cls: 'bg-dark-600 border border-dark-500' },
-          { label: 'Selected', cls: 'bg-brand-500 border border-brand-500' },
-          { label: 'Reserved', cls: 'bg-yellow-500/20 border border-yellow-500/40' },
-          { label: 'Booked', cls: 'bg-dark-700 border border-dark-700 opacity-50' },
-        ].map(({ label, cls }) => (
-          <div key={label} className="flex items-center gap-2 text-xs text-dark-400">
-            <div className={`w-5 h-5 rounded-sm ${cls}`} />
-            {label}
-          </div>
-        ))}
-      </div>
+        {/* Screen bar — w-full stretches to match seat grid width */}
+        <div className="screen-top-inline mb-2" />
+        <p className="text-center text-xs text-dark-500 uppercase tracking-widest mb-8">Screen This Way</p>
 
-      {/* Seat Grid */}
-      <div className="overflow-x-auto">
-        <div className="min-w-max mx-auto space-y-2 px-4">
-          {/* Price legend by row */}
+        {/* Seat Legend */}
+        <div className="flex flex-wrap justify-center gap-5 mb-8">
+          {[
+            { label: 'Available', cls: 'bg-dark-600 border border-dark-500' },
+            { label: 'Selected', cls: 'bg-brand-500 border border-brand-500' },
+            { label: 'Reserved', cls: 'bg-yellow-500/20 border border-yellow-500/40' },
+            { label: 'Booked', cls: 'bg-dark-700 border border-dark-700 opacity-50' },
+          ].map(({ label, cls }) => (
+            <div key={label} className="flex items-center gap-2 text-xs text-dark-400">
+              <div className={`w-5 h-5 rounded-sm ${cls}`} />
+              {label}
+            </div>
+          ))}
+        </div>
+
+        {/* Seat rows */}
+        <div className="space-y-2">
           {(Object.entries(seatsByRow) as [string, any[]][]).map(([row, rowSeats]) => {
             const rowType = rowSeats[0]?.type
             return (
@@ -175,6 +174,7 @@ export default function SeatSelectionPage() {
             )
           })}
         </div>
+
       </div>
 
       {/* Pricing breakdown */}
