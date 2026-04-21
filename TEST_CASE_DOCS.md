@@ -57,7 +57,20 @@ This document provides a detailed breakdown of the automated integration tests i
 
 ---
 
-## 3. How to Execute Tests
+## 3. System Testing (End-to-End)
+System tests verify that all components (Frontend, Backend, DB, Redis, SMTP) work together seamlessly across a full user journey.
+
+| Case ID | Feature | Scenario | Expected Outcome |
+| :--- | :--- | :--- | :--- |
+| SYS-01 | Main Flow | Full booking journey: Register ⮕ Login ⮕ Select Movie ⮕ Book Seats ⮕ Pay. | Confirmed booking in DB + Receipt Email sent. |
+| SYS-02 | Concurrency | Two users locking same seat at exact same time. | One succeeds (200 OK), one fails (409 Conflict). |
+| SYS-03 | Redis TTL | Lock seats ⮕ Wait > 5 mins ⮕ Attempt Payment. | Redis lock expires; Payment rejected; Seats released. |
+| SYS-04 | Security | Normal user attempts to access `/api/admin/*` routes. | 403 Forbidden Access denied. |
+| SYS-05 | Compliance | Cancel ticket 1.5 hours before show (under 2hr limit). | System rejects refund based on policy logic. |
+
+---
+
+## 4. How to Execute Tests
 
 Ensure you are in the `backend` directory:
 
@@ -78,7 +91,7 @@ npm test auth.routes.test.ts
 
 ---
 
-## 4. Test execution Evidence (Actual Result)
+## 5. Test execution Evidence (Actual Result)
 Below is a snapshot of the final test execution run. All **148 tests** across **11 suites** passed successfully.
 
 ```text
@@ -103,7 +116,7 @@ Ran all test suites.
 
 ---
 
-## 5. Unit Test Case Samples
+## 6. Unit Test Case Samples
 While integration tests check API endpoints, **Unit Tests** verify individual logic functions.
 
 ### 5.1 Coupon Logic Unit Test (`coupon.controller.test.ts`)
@@ -125,7 +138,7 @@ describe('computeDiscount', () => {
 
 ---
 
-## 6. Maintenance Notes
+## 7. Maintenance Notes
 - All tests use **Mock Prisma** to prevent accidental database mutations.
 - **Nodemailer** is mocked to prevent sending actual emails during tests.
 - **Redis** is mocked for seat locking tests to ensure zero external dependencies.
