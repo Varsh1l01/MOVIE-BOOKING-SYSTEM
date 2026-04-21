@@ -12,6 +12,7 @@ import { redisClient } from './config/redis';
 import { logger } from './utils/logger';
 import { errorHandler } from './middleware/errorHandler';
 import { notFound } from './middleware/notFound';
+import { verifyMailer } from './config/mailer';
 
 // Route imports
 import authRoutes from './modules/auth/auth.routes';
@@ -104,6 +105,8 @@ const server = app.listen(PORT, async () => {
   } catch (err) {
     logger.warn('⚠️  Redis not available - seat locking disabled:', err);
   }
+
+  await verifyMailer();
 });
 
 // ─── Graceful Shutdown ──────────────────────────────────────────────────────

@@ -12,10 +12,14 @@ export default function CouponForm({ initialData, onSubmit, isLoading }: CouponF
     description: initialData?.description || '',
     type: initialData?.type || 'PERCENTAGE',
     value: initialData?.value || 10,
-    minBookingAmount: initialData?.minBookingAmount || 500,
+    minOrderAmount: initialData?.minOrderAmount || 500,
     maxDiscount: initialData?.maxDiscount || 200,
-    startDate: initialData?.startDate ? new Date(initialData.startDate).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
-    expiryDate: initialData?.expiryDate ? new Date(initialData.expiryDate).toISOString().split('T')[0] : '',
+    validFrom: initialData?.validFrom
+      ? new Date(initialData.validFrom).toISOString().split('T')[0]
+      : new Date().toISOString().split('T')[0],
+    validUntil: initialData?.validUntil
+      ? new Date(initialData.validUntil).toISOString().split('T')[0]
+      : '',
     usageLimit: initialData?.usageLimit || 100,
     isActive: initialData?.isActive ?? true,
   })
@@ -31,11 +35,11 @@ export default function CouponForm({ initialData, onSubmit, isLoading }: CouponF
     onSubmit({
       ...formData,
       value: Number(formData.value),
-      minBookingAmount: Number(formData.minBookingAmount),
+      minOrderAmount: Number(formData.minOrderAmount),
       maxDiscount: Number(formData.maxDiscount),
       usageLimit: Number(formData.usageLimit),
-      startDate: new Date(formData.startDate),
-      expiryDate: new Date(formData.expiryDate),
+      validFrom: new Date(formData.validFrom).toISOString(),
+      validUntil: new Date(formData.validUntil).toISOString(),
     })
   }
 
@@ -53,7 +57,7 @@ export default function CouponForm({ initialData, onSubmit, isLoading }: CouponF
           <label className="input-label">Discount Type</label>
           <select name="type" value={formData.type} onChange={handleChange} className="input-field">
             <option value="PERCENTAGE">Percentage (%)</option>
-            <option value="FIXED">Fixed Amount (₹)</option>
+            <option value="FLAT">Flat Amount (₹)</option>
           </select>
         </div>
       </div>
@@ -73,7 +77,7 @@ export default function CouponForm({ initialData, onSubmit, isLoading }: CouponF
         </div>
         <div>
           <label className="input-label">Min Booking (₹)</label>
-          <input type="number" name="minBookingAmount" value={formData.minBookingAmount} onChange={handleChange} className="input-field" required />
+          <input type="number" name="minOrderAmount" value={formData.minOrderAmount} onChange={handleChange} className="input-field" required />
         </div>
         <div>
           <label className="input-label">Max Discount (₹)</label>
@@ -84,11 +88,11 @@ export default function CouponForm({ initialData, onSubmit, isLoading }: CouponF
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="input-label">Start Date</label>
-          <input type="date" name="startDate" value={formData.startDate} onChange={handleChange} className="input-field" required />
+          <input type="date" name="validFrom" value={formData.validFrom} onChange={handleChange} className="input-field" required />
         </div>
         <div>
           <label className="input-label">Expiry Date</label>
-          <input type="date" name="expiryDate" value={formData.expiryDate} onChange={handleChange} className="input-field" required />
+          <input type="date" name="validUntil" value={formData.validUntil} onChange={handleChange} className="input-field" required />
         </div>
       </div>
 

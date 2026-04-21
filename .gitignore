@@ -20,10 +20,10 @@ backend/.env
 frontend/.env
 backend/.env.*
 frontend/.env.*
+*.test.env
 
 # ─── Databases ──────────────────────────────────────────────────────────────
 # Prisma
-/backend/prisma/migrations/
 # Local database files
 *.db
 *.sqlite
@@ -37,6 +37,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 backend/logs/
+coverage/
 
 # ─── System & Editor ────────────────────────────────────────────────────────
 .DS_Store

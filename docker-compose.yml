@@ -43,6 +43,14 @@ services:
       - JWT_REFRESH_SECRET=your_super_secret_refresh_token_key
       - FRONTEND_URL=http://localhost:5173
       - TMDB_API_KEY=1b7ad81bb8326f76b13009d5be880174
+      # Gmail SMTP
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_SECURE=false
+      - SMTP_USER=rathodvarshil9@gmail.com
+      - SMTP_PASS=ughjugomocuqhlqs
+      - EMAIL_FROM=MovieBook <rathodvarshil9@gmail.com>
+      - BCRYPT_SALT_ROUNDS=12
     depends_on:
       postgres:
         condition: service_healthy

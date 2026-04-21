@@ -115,14 +115,10 @@ export const paymentsApi = {
   getStatus: (bookingId: string) => api.get(`/payments/${bookingId}`),
 }
 
-// Coupons
+// Coupons (User)
 export const couponsApi = {
-  getAll: () => api.get('/coupons'),
-  getById: (id: string) => api.get(`/coupons/${id}`),
-  validate: (data: any) => api.post('/coupons/validate', data),
-  create: (data: any) => api.post('/coupons', data),
-  update: (id: string, data: any) => api.put(`/coupons/${id}`, data),
-  delete: (id: string) => api.delete(`/coupons/${id}`),
+  getActive: () => api.get('/coupons'),
+  apply: (data: { code: string; orderAmount: number }) => api.post('/coupons/apply', data),
 }
 
 // Admin
@@ -132,6 +128,13 @@ export const adminApi = {
   getBookings: (params?: any) => api.get('/admin/bookings', { params }),
   toggleUserActive: (id: string) => api.patch(`/admin/users/${id}/toggle-active`),
   syncMovies: () => api.post('/admin/sync-movies'),
+  // Coupon management
+  getCoupons: (params?: any) => api.get('/admin/coupons', { params }),
+  getCoupon: (id: string) => api.get(`/admin/coupons/${id}`),
+  createCoupon: (data: any) => api.post('/admin/coupons', data),
+  updateCoupon: (id: string, data: any) => api.put(`/admin/coupons/${id}`, data),
+  toggleCoupon: (id: string) => api.patch(`/admin/coupons/${id}/toggle`),
+  deleteCoupon: (id: string) => api.delete(`/admin/coupons/${id}`),
 }
 
 export default api
