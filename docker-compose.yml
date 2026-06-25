@@ -39,17 +39,17 @@ services:
       - PORT=5000
       - DATABASE_URL=postgresql://postgres:password@postgres:5432/movie_booking?schema=public
       - REDIS_URL=redis://redis:6379
-      - JWT_ACCESS_SECRET=your_super_secret_access_token_key
-      - JWT_REFRESH_SECRET=your_super_secret_refresh_token_key
+      - JWT_ACCESS_SECRET=change_this_to_a_long_random_string
+      - JWT_REFRESH_SECRET=change_this_to_another_long_random_string
       - FRONTEND_URL=http://localhost:5173
-      - TMDB_API_KEY=1b7ad81bb8326f76b13009d5be880174
+      - TMDB_API_KEY=your_tmdb_api_key_here
       # Gmail SMTP
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_SECURE=false
-      - SMTP_USER=rathodvarshil9@gmail.com
-      - SMTP_PASS=ughjugomocuqhlqs
-      - EMAIL_FROM=MovieBook <rathodvarshil9@gmail.com>
+      - SMTP_USER=your_gmail@gmail.com
+      - SMTP_PASS=your_gmail_app_password
+      - EMAIL_FROM=MovieBook <your_gmail@gmail.com>
       - BCRYPT_SALT_ROUNDS=12
     depends_on:
       postgres:
