@@ -40,8 +40,8 @@ export default function Navbar() {
               <Film size={18} className="text-white" />
             </div>
             <span className="text-xl font-bold hidden sm:block">
-              <span className="text-white">Movie</span>
-              <span className="gradient-text">Book</span>
+              <span className="text-white">Cine</span>
+              <span className="gradient-text">Maa</span>
             </span>
           </Link>
 

@@ -42,7 +42,7 @@ export default function LoginPage() {
               <path d="M4 4h2v2H4V4zm0 4h2v2H4V8zm0 4h2v2H4v-2zm0 4h2v2H4v-2zM18 4h2v2h-2V4zm0 4h2v2h-2V8zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zM8 4h8v16H8V4zm2 2v12h4V6h-4z" />
             </svg>
           </div>
-          <h1 className="text-4xl font-black text-white mb-2">MovieBook</h1>
+          <h1 className="text-4xl font-black text-white mb-2">CineMaa</h1>
           <p className="text-dark-400 text-base max-w-xs leading-relaxed">
             Your gateway to seamless movie ticket booking. Book seats, discover shows, enjoy cinema.
           </p>
@@ -72,7 +72,7 @@ export default function LoginPage() {
                 <path d="M4 4h2v2H4V4zm0 4h2v2H4V8zm0 4h2v2H4v-2zm0 4h2v2H4v-2zM18 4h2v2h-2V4zm0 4h2v2h-2V8zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zM8 4h8v16H8V4zm2 2v12h4V6h-4z" />
               </svg>
             </div>
-            <span className="text-xl font-bold text-white">MovieBook</span>
+            <span className="text-xl font-bold text-white">CineMaa</span>
           </div>
 
           <h2 className="text-3xl font-bold text-dark-100 mb-1">Welcome back</h2>
@@ -153,7 +153,7 @@ export default function LoginPage() {
           {/* Quick test credentials hint */}
           <div className="mt-4 p-3 bg-dark-800/60 border border-dark-700 rounded-lg text-xs text-dark-400">
             <span className="font-medium text-dark-300">Demo:</span>{' '}
-            <button type="button" className="text-brand-400 hover:text-brand-300" onClick={() => setForm({ email: 'admin@moviebooking.com', password: 'Admin@1234' })}>Admin</button>
+            <button type="button" className="text-brand-400 hover:text-brand-300" onClick={() => setForm({ email: 'admin@cinemaa.in', password: 'Admin@1234' })}>Admin</button>
             {' '}·{' '}
             <button type="button" className="text-brand-400 hover:text-brand-300" onClick={() => setForm({ email: 'john@example.com', password: 'User@1234' })}>User</button>
           </div>

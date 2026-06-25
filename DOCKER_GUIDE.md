@@ -1,4 +1,4 @@
-# Movie Booking System - Docker Guide
+# CineMaa - Docker Guide
 
 This project is now fully automated with Docker. You can start the entire stack (Frontend, Backend, Database, and Redis) with a single command.
 

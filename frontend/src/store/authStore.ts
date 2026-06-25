@@ -41,7 +41,7 @@ export const useAuthStore = create<AuthState>()(
       logout: () => set({ user: null, accessToken: null, isAuthenticated: false }),
     }),
     {
-      name: 'movie-booking-auth',
+      name: 'cinemaa-auth',
       // Only persist user info, NOT the access token (security)
       partialize: (state) => ({ user: state.user, isAuthenticated: state.isAuthenticated }),
     },

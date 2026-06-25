@@ -1,7 +1,7 @@
 import { transporter } from '../../config/mailer';
 import { logger } from '../../utils/logger';
 
-const FROM = process.env.EMAIL_FROM || '"MovieBook" <rathodvarshil9@gmail.com>';
+const FROM = process.env.EMAIL_FROM || '"CineMaa" <rathodvarshil9@gmail.com>';
 
 // ─── OTP Email ────────────────────────────────────────────────────────────────
 export const sendOtpEmail = async (email: string, name: string, otp: string, purpose: string): Promise<void> => {
@@ -28,7 +28,7 @@ export const sendOtpEmail = async (email: string, name: string, otp: string, pur
             <!-- Header -->
             <div style="background:linear-gradient(135deg,#e50914,#b00610);padding:32px;text-align:center">
               <div style="font-size:32px;margin-bottom:8px">🎬</div>
-              <h1 style="color:#fff;margin:0;font-size:22px;font-weight:700;letter-spacing:-0.5px">MovieBook</h1>
+              <h1 style="color:#fff;margin:0;font-size:22px;font-weight:700;letter-spacing:-0.5px">CineMaa</h1>
             </div>
             <!-- Body -->
             <div style="padding:32px">
@@ -48,7 +48,7 @@ export const sendOtpEmail = async (email: string, name: string, otp: string, pur
             </div>
             <!-- Footer -->
             <div style="padding:20px 32px;border-top:1px solid #2a2a2a;text-align:center">
-              <p style="color:#444;font-size:12px;margin:0">© 2025 MovieBook · All rights reserved</p>
+              <p style="color:#444;font-size:12px;margin:0">© 2025 CineMaa · All rights reserved</p>
             </div>
           </div>
         </body>
@@ -67,7 +67,7 @@ export const sendWelcomeEmail = async (email: string, name: string): Promise<voi
     await transporter.sendMail({
       from: FROM,
       to: email,
-      subject: '🎬 Welcome to MovieBook!',
+      subject: '🎬 Welcome to CineMaa!',
       html: `
         <!DOCTYPE html>
         <html>
@@ -75,7 +75,7 @@ export const sendWelcomeEmail = async (email: string, name: string): Promise<voi
           <div style="max-width:480px;margin:40px auto;background:#1a1a1a;border-radius:16px;overflow:hidden;border:1px solid #2a2a2a">
             <div style="background:linear-gradient(135deg,#e50914,#b00610);padding:32px;text-align:center">
               <div style="font-size:32px;margin-bottom:8px">🎬</div>
-              <h1 style="color:#fff;margin:0;font-size:22px;font-weight:700">MovieBook</h1>
+              <h1 style="color:#fff;margin:0;font-size:22px;font-weight:700">CineMaa</h1>
             </div>
             <div style="padding:32px">
               <h2 style="color:#f1f1f1;margin:0 0 12px;font-size:22px">Welcome aboard, ${name}! 🎉</h2>
@@ -91,7 +91,7 @@ export const sendWelcomeEmail = async (email: string, name: string): Promise<voi
               </div>
             </div>
             <div style="padding:20px 32px;border-top:1px solid #2a2a2a;text-align:center">
-              <p style="color:#444;font-size:12px;margin:0">© 2025 MovieBook · All rights reserved</p>
+              <p style="color:#444;font-size:12px;margin:0">© 2025 CineMaa · All rights reserved</p>
             </div>
           </div>
         </body>
@@ -119,7 +119,7 @@ export const sendPasswordResetEmail = async (email: string, name: string, otp: s
     await transporter.sendMail({
       from: FROM,
       to: email,
-      subject: '🔑 Password Reset OTP — MovieBook',
+      subject: '🔑 Password Reset OTP — CineMaa',
       html: `
         <!DOCTYPE html>
         <html>
@@ -142,7 +142,7 @@ export const sendPasswordResetEmail = async (email: string, name: string, otp: s
               </p>
             </div>
             <div style="padding:20px 32px;border-top:1px solid #2a2a2a;text-align:center">
-              <p style="color:#444;font-size:12px;margin:0">© 2025 MovieBook · All rights reserved</p>
+              <p style="color:#444;font-size:12px;margin:0">© 2025 CineMaa · All rights reserved</p>
             </div>
           </div>
         </body>
@@ -194,7 +194,7 @@ export const sendBookingConfirmationEmail = async (
               </table>
             </div>
             <div style="padding:20px 32px;border-top:1px solid #2a2a2a;text-align:center">
-              <p style="color:#444;font-size:12px;margin:0">© 2025 MovieBook · All rights reserved</p>
+              <p style="color:#444;font-size:12px;margin:0">© 2025 CineMaa · All rights reserved</p>
             </div>
           </div>
         </body>

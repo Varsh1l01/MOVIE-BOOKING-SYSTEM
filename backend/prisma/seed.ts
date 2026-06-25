@@ -11,11 +11,11 @@ async function main() {
   const userPass = await bcrypt.hash('User@1234', 12);
 
   const admin = await prisma.user.upsert({
-    where: { email: 'admin@moviebooking.com' },
+    where: { email: 'admin@cinemaa.in' },
     update: {},
     create: {
       name: 'Admin User',
-      email: 'admin@moviebooking.com',
+      email: 'admin@cinemaa.in',
       phone: '9000000001',
       passwordHash: adminPass,
       role: Role.ADMIN,
@@ -394,7 +394,7 @@ async function main() {
   console.log('✅ Coupons seeded');
   console.log('\n🎉 Database seeded successfully!');
   console.log('\nTest credentials:');
-  console.log('  Admin: admin@moviebooking.com / Admin@1234');
+  console.log('  Admin: admin@cinemaa.in / Admin@1234');
   console.log('  User:  john@example.com / User@1234');
 }
 

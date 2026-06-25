@@ -66,7 +66,7 @@ app.get('/api/health', async (_req, res) => {
 
   res.json({
     success: true,
-    message: 'Movie Booking API is running',
+    message: 'CineMaa API is running',
     timestamp: new Date().toISOString(),
     services: { database: dbStatus, redis: redisStatus },
   });

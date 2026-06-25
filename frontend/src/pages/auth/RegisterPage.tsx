@@ -74,7 +74,7 @@ export default function RegisterPage() {
               <path d="M4 4h2v2H4V4zm0 4h2v2H4V8zm0 4h2v2H4v-2zm0 4h2v2H4v-2zM18 4h2v2h-2V4zm0 4h2v2h-2V8zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zM8 4h8v16H8V4zm2 2v12h4V6h-4z" />
             </svg>
           </div>
-          <h1 className="text-4xl font-black text-white mb-2">Join MovieBook</h1>
+          <h1 className="text-4xl font-black text-white mb-2">Join CineMaa</h1>
           <p className="text-dark-400 text-base max-w-xs leading-relaxed">
             Create your free account and start booking movie tickets instantly.
           </p>
@@ -104,7 +104,7 @@ export default function RegisterPage() {
                 <path d="M4 4h2v2H4V4zm0 4h2v2H4V8zm0 4h2v2H4v-2zm0 4h2v2H4v-2zM18 4h2v2h-2V4zm0 4h2v2h-2V8zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zM8 4h8v16H8V4zm2 2v12h4V6h-4z" />
               </svg>
             </div>
-            <span className="text-xl font-bold text-white">MovieBook</span>
+            <span className="text-xl font-bold text-white">CineMaa</span>
           </div>
 
           <h2 className="text-3xl font-bold text-dark-100 mb-1">Create account</h2>

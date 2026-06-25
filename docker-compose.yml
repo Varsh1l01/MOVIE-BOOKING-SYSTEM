@@ -3,7 +3,7 @@ version: '3.8'
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: movie-booking-db
+    container_name: cinemaa-db
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -21,7 +21,7 @@ services:
 
   redis:
     image: redis:7-alpine
-    container_name: movie-booking-redis
+    container_name: cinemaa-redis
     restart: always
     ports:
       - '6379:6379'
@@ -30,7 +30,7 @@ services:
 
   backend:
     build: ./backend
-    container_name: movie-booking-backend
+    container_name: cinemaa-backend
     restart: always
     ports:
       - '5000:5000'
@@ -49,7 +49,7 @@ services:
       - SMTP_SECURE=false
       - SMTP_USER=your_gmail@gmail.com
       - SMTP_PASS=your_gmail_app_password
-      - EMAIL_FROM=MovieBook <your_gmail@gmail.com>
+      - EMAIL_FROM=CineMaa <your_gmail@gmail.com>
       - BCRYPT_SALT_ROUNDS=12
     depends_on:
       postgres:
@@ -61,7 +61,7 @@ services:
 
   frontend:
     build: ./frontend
-    container_name: movie-booking-frontend
+    container_name: cinemaa-frontend
     restart: always
     ports:
       - '5173:5173'

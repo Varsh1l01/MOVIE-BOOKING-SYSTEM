@@ -13,8 +13,8 @@ export default function Footer() {
                 <Film size={18} className="text-white" />
               </div>
               <span className="text-xl font-bold">
-                <span className="text-white">Movie</span>
-                <span className="gradient-text">Book</span>
+                <span className="text-white">Cine</span>
+                <span className="gradient-text">Maa</span>
               </span>
             </Link>
             <p className="text-dark-400 text-sm leading-relaxed mb-4">
@@ -59,7 +59,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2 text-dark-400">
                 <Mail size={14} className="text-brand-500" />
-                support@moviebook.com
+                support@cinemaa.in
               </li>
               <li className="flex items-center gap-2 text-dark-400">
                 <Phone size={14} className="text-brand-500" />
@@ -74,7 +74,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 mt-8 border-t border-dark-700 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-dark-500">
-          <p>© 2024 MovieBook. All rights reserved.</p>
+          <p>© 2024 CineMaa. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <a href="#" className="hover:text-dark-300 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-dark-300 transition-colors">Terms of Service</a>

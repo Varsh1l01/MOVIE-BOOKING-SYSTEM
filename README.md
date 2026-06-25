@@ -1,12 +1,31 @@
-# 🎬 Movie Booking System
+<div align="center">
 
-> A full-stack, production-ready movie ticket booking platform with real-time seat locking, coupon management, payment simulation, and a complete admin dashboard — built with modern web technologies.
+# 🎬 CineMaa
+
+**A Full-Stack Movie Ticket Booking Platform**
+
+*Browse. Pick seats. Pay. Enjoy — all from one seamless platform.*
+
+[![Node.js](https://img.shields.io/badge/Node.js-20+-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-4.x-000000?logo=express&logoColor=white)](https://expressjs.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-5-2D3748?logo=prisma&logoColor=white)](https://www.prisma.io/)
+[![Redis](https://img.shields.io/badge/Redis-7-DC382D?logo=redis&logoColor=white)](https://redis.io/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+[![JWT](https://img.shields.io/badge/JWT-Auth-000000?logo=jsonwebtokens&logoColor=white)](https://jwt.io/)
+[![License](https://img.shields.io/badge/License-MIT-F7DF1E?logoColor=black)](LICENSE)
+
+</div>
 
 ---
 
 ## 📖 Overview
 
-**Movie Booking System** is a feature-rich web application that replicates the core experience of platforms like BookMyShow. Users can browse now-playing and upcoming movies (synced live from TMDB), select shows and showtimes, pick seats interactively, apply discount coupons, and complete a simulated payment flow — all in one seamless experience.
+**CineMaa** is a feature-rich web application that replicates the core experience of platforms like BookMyShow. Users can browse now-playing and upcoming movies (synced live from TMDB), select shows and showtimes, pick seats interactively, apply discount coupons, and complete a simulated payment flow — all in one seamless experience.
 
 Admins get a dedicated dashboard to manage movies, theatres, screens, shows, coupons, and bookings — with real-time analytics via charts.
 
@@ -187,7 +206,7 @@ docker-compose logs -f backend
 ## 📁 Project Structure
 
 ```
-MOVIE-BOOKING-SYSTEM/
+CINEMAA/
 ├── docker-compose.yml          # Multi-service orchestration
 ├── .gitignore
 │
@@ -374,8 +393,8 @@ cd frontend && npm run dev
 
 | Role | Email | Password |
 |---|---|---|
-| Admin | `admin@moviebook.com` | `Admin@123` |
-| User | `user@moviebook.com` | `User@123` |
+| Admin | `admin@cinemaa.in` | `Admin@1234` |
+| User | `user@cinemaa.in` | `User@1234` |
 
 ---
 

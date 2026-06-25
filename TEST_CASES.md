@@ -1,7 +1,7 @@
-# Movie Booking System - Test Case Documentation
+# CineMaa - Test Case Documentation
 
 ## 1. Overview
-This document provides a detailed breakdown of the automated integration tests implemented for the Movie Booking System. These tests ensure the reliability, security, and correctness of core business logic.
+This document provides a detailed breakdown of the automated integration tests implemented for CineMaa. These tests ensure the reliability, security, and correctness of core business logic.
 
 - **Framework:** Jest
 - **API Testing:** Supertest
